@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
+import { Topo } from "./src/Topo";
+import { Tarefa } from "./src/Tarefa";
+
+import { Styles } from "./src/Styles";
+import { NovaTarefa } from "./src/NovaTarefa";
 
 export default function App() {
+  // const [tarefas, setTarefas] = useState([]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={Styles.container}>
+      <View style={Styles.barraStatus} />
+      <Topo />
+
+      <NovaTarefa />
+      <ScrollView style={Styles.listaDeTarefas}>
+        <Tarefa />
+        <Tarefa />
+      </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
