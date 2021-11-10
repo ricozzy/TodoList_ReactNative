@@ -1,27 +1,24 @@
 import React from "react";
-import {
-  Text,
-  Button,
-  Alert,
-  View,
-  TouchableOpacity,
-  ColorPropType,
-} from "react-native";
+import Checkbox from "expo-checkbox";
+import { Text, View, TouchableOpacity } from "react-native";
 import { Styles } from "./Styles";
 
-export const Tarefa = () => {
-  return (
-    <View style={Styles.tarefa}>
-      <Text>Passear com o cachorro!!!</Text>
-      <TouchableOpacity
-        style={Styles.botaoExcluir}
-        activeOpacity={0.6}
-        onPress={() =>
-          Alert.alert("MSG", "Tem certeza que deseja excluir esse item?")
-        }
-      >
-        <Text style={Styles.textoExcluir}>X</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+export const Tarefa = (props) =>
+  props.tarefas.map((item) => {
+    return (
+      <View style={[item.status ? Styles.tarefaConcluida : Styles.tarefa]}>
+        <Checkbox
+          value={item.status}
+          onValueChange={() => props.atualizaStatus(item.id)}
+        />
+        <Text>{item.nome}</Text>
+        <TouchableOpacity
+          style={Styles.botaoExcluir}
+          activeOpacity={0.6}
+          onPress={() => props.excluirTarefa(item.id)}
+        >
+          <Text style={Styles.textoBranco}>X</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  });
